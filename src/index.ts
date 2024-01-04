@@ -1,5 +1,5 @@
 
-// Define constants for element IDs and classes
+// variables
 
 
 
