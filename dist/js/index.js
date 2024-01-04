@@ -20,10 +20,9 @@ function fetchDataBooks() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch('https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books');
-            books.length = 0;
             books.push(...yield response.json());
-            yield showBooks("");
             console.log(fetchDataBooks);
+            yield showBooks("");
         }
         catch (error) {
             console.error(`Error fetching books: ${error}`);

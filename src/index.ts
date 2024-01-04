@@ -31,11 +31,10 @@ async function fetchDataBooks() {
     try {
         const response = await fetch('https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books');
         
-        books.length = 0;
         books.push(...(await response.json() as Book[]));
-        
-        await showBooks("");
         console.log(fetchDataBooks);
+        await showBooks("");
+
         
     } catch (error) {
         console.error(`Error fetching books: ${error}`);
