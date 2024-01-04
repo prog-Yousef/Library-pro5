@@ -1,18 +1,7 @@
 
-// variables
 
 
-
-const booksContainer = document.getElementById("booksContainer") as HTMLInputElement;
-const Modal = document.getElementById("Modal") as HTMLInputElement; 
-const searchButton = document.getElementById("search-btn") as HTMLInputElement;
-const searchInput = document.getElementById("search-input") as HTMLInputElement;
-const ModalContent = document.getElementById("Modal-content-inner")as HTMLInputElement;
-const ModalClose = document.getElementById("Modal-close")as HTMLInputElement; 
-const books: Book[] = [];
-
-
-// Define the Book interface
+//  interface
 interface Book {
     title: string;
     author: string;
@@ -24,62 +13,87 @@ interface Book {
     color?: string;
 }
 
+// variables
+
+const booksContainer = document.getElementById("booksContainer") as HTMLInputElement;
+const Modal = document.getElementById("Modal") as HTMLInputElement; 
+const searchButton = document.getElementById("search-btn") as HTMLInputElement;
+const searchInput = document.getElementById("search-input") as HTMLInputElement;
+const ModalContent = document.getElementById("Modal-content-inner")as HTMLInputElement;
+const ModalClose = document.getElementById("Modal-close")as HTMLInputElement; 
+const books: Book[] = [];
+
+
+
 
 // fetch data from api
 async function fetchDataBooks() {
     try {
         const response = await fetch('https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books');
-        books.length = 0; 
+        
+        books.length = 0;
         books.push(...(await response.json() as Book[]));
+        
         await showBooks("");
         console.log(fetchDataBooks);
         
     } catch (error) {
-        console.error("Error fetching books: ", error);
+        console.error(`Error fetching books: ${error}`);
     }
 }
 
-// Function to display books 
-async function showBooks(searchQuery: string) {
 
-    if (!booksContainer) return;
+// Function to display books 
+async function showBooks(searchResults: string): Promise<void> {
+    if (!booksContainer) {
+        return;
+    }
 
     booksContainer.innerHTML = '';
 
-    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredBooks = books.filter((book) =>
+        book.title.toLowerCase().includes(searchResults.toLowerCase())
+    );
 
-    for (const book of filteredBooks) {
+    filteredBooks.forEach((book) => {
         const bookCard = createBookContent(book);
         booksContainer.appendChild(bookCard);
-    }
+    });
 }
 
 // Function to create elements
 function createBookContent(book: Book): HTMLElement {
-    const bookWrapp = document.createElement("div");
-    bookWrapp.classList.add("book");
+    const bookWrapper = document.createElement("div");
+    bookWrapper.classList.add("book");
 
     if (book.color) {
-        bookWrapp.style.backgroundColor = book.color;
+        bookWrapper.style.backgroundColor = book.color;
     }
 
-    bookWrapp.innerHTML = `
-        <div class="book-title">${book.title}</div>
-        <div class="book-author">${book.author}</div>
-    `;
-    bookWrapp.addEventListener("click", () => showBookDetails(book));
+    const titleElement = document.createElement("div");
+    titleElement.classList.add("book-title");
+    titleElement.textContent = book.title;
 
-    return bookWrapp;
+    const authorElement = document.createElement("div");
+    authorElement.classList.add("book-author");
+    authorElement.textContent = book.author;
+
+    bookWrapper.appendChild(titleElement);
+    bookWrapper.appendChild(authorElement);
+
+    bookWrapper.addEventListener("click", () => showBookDetails(book));
+
+    return bookWrapper;
 }
 
 // Function to display book content
-function showBookDetails(book: Book) {
-
-
+function showBookDetails(book: Book): void {
     if (Modal && ModalContent) {
-      ModalContent.innerHTML = `
-            <div class="book-">
-                <div class="book" style="background-color: ${book.color || '#fff'}">
+        const modalBackgroundColor = book.color || '#fff';
+
+        ModalContent.innerHTML = `
+            <div class="book-details">
+                <div class="book" style="background-color: ${modalBackgroundColor}">
                     <div class="book-title">${book.title}</div>
                     <div class="book-author">${book.author}</div>
                 </div>
@@ -97,7 +111,7 @@ function showBookDetails(book: Book) {
 
                 <div class="details-container">
                     <p>Audience: ${book.audience || 'Not found'}</p>
-                    <p>Pages:${book.pages || 'Not found'}</p>
+                    <p>Pages: ${book.pages || 'Not found'}</p>
                     <p>Year: ${book.year || 'Not found'}</p>
                     <p>Publisher: ${book.publisher || 'Not found'}</p>
                 </div>
@@ -106,9 +120,8 @@ function showBookDetails(book: Book) {
 
         Modal.style.display = "flex";
 
-      
         if (ModalClose) {
-          ModalClose.addEventListener("click", () => {
+            ModalClose.addEventListener("click", () => {
                 Modal.style.display = "none";
             });
         }
