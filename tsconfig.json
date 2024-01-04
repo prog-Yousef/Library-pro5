@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "outDir": "./dist/js",
+    },
+    "include": [
+        "src/index.ts"
+    ],
+}
