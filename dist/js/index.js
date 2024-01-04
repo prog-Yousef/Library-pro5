@@ -8,10 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const searchButton = document.getElementById("search-btn");
-const searchInput = document.getElementById("search-input");
 const booksContainer = document.getElementById("booksContainer");
 const Modal = document.getElementById("Modal");
+const searchButton = document.getElementById("search-btn");
+const searchInput = document.getElementById("search-input");
 const ModalContent = document.getElementById("Modal-content-inner");
 const ModalClose = document.getElementById("Modal-close");
 const books = [];
@@ -100,13 +100,9 @@ function showBookDetails(book) {
     }
 }
 // Event listener to call the function
-document.addEventListener("DOMContentLoaded", () => {
-    const searchButton = document.getElementById("search-btn");
-    const searchInput = document.getElementById("search-input");
-    if (searchButton && searchInput) {
-        searchButton.addEventListener("click", () => {
-            showBooks(searchInput.value);
-        });
-    }
-    fetchDataBooks();
-});
+if (searchButton && searchInput) {
+    searchButton.addEventListener("click", () => {
+        showBooks(searchInput.value);
+    });
+}
+fetchDataBooks();

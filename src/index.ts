@@ -2,10 +2,11 @@
 // Define constants for element IDs and classes
 
 
-const searchButton = document.getElementById("search-btn") as HTMLInputElement;
-const searchInput = document.getElementById("search-input") as HTMLInputElement;
+
 const booksContainer = document.getElementById("booksContainer") as HTMLInputElement;
 const Modal = document.getElementById("Modal") as HTMLInputElement; 
+const searchButton = document.getElementById("search-btn") as HTMLInputElement;
+const searchInput = document.getElementById("search-input") as HTMLInputElement;
 const ModalContent = document.getElementById("Modal-content-inner")as HTMLInputElement;
 const ModalClose = document.getElementById("Modal-close")as HTMLInputElement; 
 const books: Book[] = [];
@@ -121,15 +122,11 @@ function showBookDetails(book: Book) {
 }
 
 // Event listener to call the function
-document.addEventListener("DOMContentLoaded", () => {
-  const searchButton = document.getElementById("search-btn") as HTMLButtonElement | null;
-  const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
 
-  if (searchButton && searchInput) {
+if (searchButton && searchInput) {
     searchButton.addEventListener("click", () => {
-      showBooks(searchInput.value);
+        showBooks(searchInput.value);
     });
-  }
+}
 
-  fetchDataBooks();
-});
+fetchDataBooks();
