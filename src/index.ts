@@ -106,14 +106,14 @@ function showBookDetails(book: Book): void {
                 </div>
 
                 <div class="details-1">
-                    <p>${book.plot || 'Not found'}</p>
+                    <p>${book.plot }</p>
                 </div>
 
                 <div class="details-container">
-                    <p>Audience: ${book.audience || 'Not found'}</p>
-                    <p>Pages: ${book.pages || 'Not found'}</p>
-                    <p>Year: ${book.year || 'Not found'}</p>
-                    <p>Publisher: ${book.publisher || 'Not found'}</p>
+                    <p>Audience: ${book.audience }</p>
+                    <p>Pages: ${book.pages }</p>
+                    <p>Year: ${book.year}</p>
+                    <p>Publisher: ${book.publisher }</p>
                 </div>
             </div>
         `;
