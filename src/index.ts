@@ -8,7 +8,7 @@ const booksContainer = document.getElementById("booksContainer") as HTMLInputEle
 const Modal = document.getElementById("Modal") as HTMLInputElement; 
 const ModalContent = document.getElementById("Modal-content-inner")as HTMLInputElement;
 const ModalClose = document.getElementById("Modal-close")as HTMLInputElement; 
-
+const books: Book[] = [];
 
 
 // Define the Book interface
@@ -23,10 +23,8 @@ interface Book {
     color?: string;
 }
 
-// Initialize the books array with type annotation
-const books: Book[] = [];
 
-// Function to initialize the books array by fetching data from a JSON API
+// fetch data from api
 async function fetchDataBooks() {
     try {
         const response = await fetch('https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books');
@@ -40,7 +38,7 @@ async function fetchDataBooks() {
     }
 }
 
-// Function to display books based on a search query
+// Function to display books 
 async function showBooks(searchQuery: string) {
 
     if (!booksContainer) return;
@@ -55,7 +53,7 @@ async function showBooks(searchQuery: string) {
     }
 }
 
-// Function to create a book card element
+// Function to create elements
 function createBookContent(book: Book): HTMLElement {
     const bookWrapp = document.createElement("div");
     bookWrapp.classList.add("book");
