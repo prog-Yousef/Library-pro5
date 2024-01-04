@@ -14,9 +14,8 @@ const booksContainer = document.getElementById("booksContainer");
 const Modal = document.getElementById("Modal");
 const ModalContent = document.getElementById("Modal-content-inner");
 const ModalClose = document.getElementById("Modal-close");
-// Initialize the books array with type annotation
 const books = [];
-// Function to initialize the books array by fetching data from a JSON API
+// fetch data from api
 function fetchDataBooks() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -31,7 +30,7 @@ function fetchDataBooks() {
         }
     });
 }
-// Function to display books based on a search query
+// Function to display books 
 function showBooks(searchQuery) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!booksContainer)
@@ -44,7 +43,7 @@ function showBooks(searchQuery) {
         }
     });
 }
-// Function to create a book card element
+// Function to create elements
 function createBookContent(book) {
     const bookWrapp = document.createElement("div");
     bookWrapp.classList.add("book");
