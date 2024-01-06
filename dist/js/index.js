@@ -31,16 +31,14 @@ function fetchDataBooks() {
 }
 // Function to display books 
 function showBooks(searchResults) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (!booksContainer) {
-            return;
-        }
-        booksContainer.innerHTML = '';
-        const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchResults.toLowerCase()));
-        filteredBooks.forEach((book) => {
-            const bookCard = createBookContent(book);
-            booksContainer.appendChild(bookCard);
-        });
+    if (!booksContainer) {
+        return;
+    }
+    booksContainer.innerHTML = '';
+    const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchResults.toLowerCase()));
+    filteredBooks.forEach((book) => {
+        const bookCard = createBookContent(book);
+        booksContainer.appendChild(bookCard);
     });
 }
 // Function to create elements
@@ -61,6 +59,13 @@ function createBookContent(book) {
     bookWrapper.addEventListener("click", () => showBookDetails(book));
     return bookWrapper;
 }
+// Event listener to call the function
+if (searchButton && searchInput) {
+    searchButton.addEventListener("click", () => {
+        showBooks(searchInput.value);
+    });
+}
+fetchDataBooks();
 // Function to display book content
 function showBookDetails(book) {
     if (Modal && ModalContent) {
@@ -104,10 +109,3 @@ function showBookDetails(book) {
         });
     }
 }
-// Event listener to call the function
-if (searchButton && searchInput) {
-    searchButton.addEventListener("click", () => {
-        showBooks(searchInput.value);
-    });
-}
-fetchDataBooks();

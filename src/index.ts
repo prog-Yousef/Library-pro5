@@ -43,7 +43,7 @@ async function fetchDataBooks() {
 
 
 // Function to display books 
-async function showBooks(searchResults: string): Promise<void> {
+ function showBooks(searchResults: string): Promise<void> {
     if (!booksContainer) {
         return;
     }
@@ -84,6 +84,20 @@ function createBookContent(book: Book): HTMLElement {
 
     return bookWrapper;
 }
+
+
+
+
+// Event listener to call the function
+
+if (searchButton && searchInput) {
+    searchButton.addEventListener("click", () => {
+        showBooks(searchInput.value);
+    });
+}
+
+fetchDataBooks();
+
 
 // Function to display book content
 function showBookDetails(book: Book): void {
@@ -132,13 +146,3 @@ function showBookDetails(book: Book): void {
         });
     }
 }
-
-// Event listener to call the function
-
-if (searchButton && searchInput) {
-    searchButton.addEventListener("click", () => {
-        showBooks(searchInput.value);
-    });
-}
-
-fetchDataBooks();
